@@ -69,8 +69,8 @@
             <div class="col-md-3 column" style="background: #00B51D"
                  onclick="parkCar()">
                 <img src="images/logo-two.png">
-                <h2>池塘录入</h2>
-                <p>录入池塘信息和环境监测设备</p>
+                <h2>数据统计</h2>
+                <p>水库池塘信息统计汇总</p>
             </div>
 
             <div class="col-md-1 column"></div>

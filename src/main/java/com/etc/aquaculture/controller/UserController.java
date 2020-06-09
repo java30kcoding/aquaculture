@@ -33,12 +33,12 @@ public class UserController {
 
     @RequestMapping("/login.action")
     public String login(User user, Model model, HttpSession session){
-        model.addAttribute("msg", "账号或密码错误，请重新输入！");
         User login = userService.login(user);
         if (login != null) {
             session.setAttribute("USER_LOGIN", login);
             return "redirect:admin.action";
         } else {
+            model.addAttribute("msg", "账号或密码错误，请重新输入！");
             return "redirect:error.action";
         }
     }
@@ -49,6 +49,8 @@ public class UserController {
         session.invalidate();
         return "redirect:login.action";
     }
+
+
 
 
 

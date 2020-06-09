@@ -25,7 +25,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script
             src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>车库列表</title>
+    <title>水库列表</title>
     <style>
         .col-md-3 {
             border-radius: 25px;
@@ -78,7 +78,7 @@
     <div class="row">
         <div class="col-md-12 column">
             <div class="welcome">
-                <h2>车库信息管理</h2>
+                <h2>水库信息管理</h2>
             </div>
         </div>
     </div>
@@ -99,19 +99,17 @@
                         <td>名称</td>
                         <td>位置</td>
                         <td>描述</td>
-                        <td>车位总数</td>
-                        <td>车位价格</td>
+                        <td>池塘总数</td>
                         <td>操作</td>
                     </tr>
-                    <c:forEach items="${cList}" var="csn" varStatus="id">
+                    <c:forEach items="${pList}" var="csn" varStatus="id">
                         <tr>
                             <td>${id.count}</td>
-                            <td>${csn.c_name}</td>
-                            <td>${csn.c_location}</td>
-                            <td>${csn.c_description}</td>
-                            <td>${csn.c_total}</td>
-                            <td>${csn.c_price}元&nbsp;/&nbsp;${csn.c_pricetime}小时</td>
-                            <td><a href="<%=basePath%>details.action?id=${csn.c_id}">
+                            <td>${csn.poolCode}</td>
+                            <td>${csn.poolLocation}</td>
+                            <td>${csn.poolRemark}</td>
+                            <td>${csn.poolCode}</td>
+                            <td><a href="<%=basePath%>details.action?id=${csn.id}">
                                 <button
                                         type="button"
                                         style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #4cae4c; color: white; font-size: 8px">
@@ -119,7 +117,7 @@
                                 </button>
                             </a>
                                 <button id="deleteUser" type="button"
-                                        onclick="deleteCarStation(${csn.c_id})"
+                                        onclick="deleteCarStation(${csn.id})"
                                         style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #f40; color: white; font-size: 8px">
                                     删除
                                 </button>

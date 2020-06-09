@@ -3,7 +3,6 @@ package com.etc.aquaculture.controller;
 import com.etc.aquaculture.common.R;
 import com.etc.aquaculture.pojo.PoolArea;
 import com.etc.aquaculture.service.PoolService;
-import com.etc.aquaculture.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +62,22 @@ public class PoolController {
         model.addAttribute("cs", cs);
         model.addAttribute("c", c);
         return "poolInfo";
+    }
+
+    @RequestMapping(value = "/poolAreaList.action")
+    public String carport(Model model) {
+        List<PoolArea> pList = poolService.listPoolArea();
+        model.addAttribute("pList", pList);
+        return "poolAreaList";
+    }
+
+    @RequestMapping(value = "details.action", method = RequestMethod.GET)
+    public String details(int id, Model model) {
+        PoolArea cs = poolService.getPoolArea((long) id);
+        PoolArea c = poolService.listPoolInfo(cs);
+        model.addAttribute("pList", c.getPoolInfoList());
+        model.addAttribute("c", c);
+        return "poolDetails";
     }
 
 }

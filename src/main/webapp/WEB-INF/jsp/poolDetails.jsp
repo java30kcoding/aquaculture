@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="itheima" uri="http://itheima.com/common/" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -80,7 +79,7 @@
     <div class="row">
         <div class="col-md-12 column">
             <div class="welcome">
-                <h2>"${c.c_name}"&nbsp;车库车位管理</h2>
+                <h2>"${c.poolCode}"&nbsp;车库车位管理</h2>
             </div>
         </div>
     </div>
@@ -89,10 +88,10 @@
         <div class="panel panel-success">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <h4>${c.c_name}</h4>
+                <h4>${c.poolCode}</h4>
                 <p>
-                    位置：${c.c_location}<br> 描述：${c.c_description}<br>
-                    车位总数：${c.c_total}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车位价格：${c.c_price}元/${c.c_pricetime}小时<br>
+                    位置：${c.poolLocation}<br> 描述：${c.poolRemark}<br>
+                    车位总数：${c.poolTotal}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <br>
                     <button style="background: #00B51D; color: white"
                             data-toggle="modal" data-target="#myModalUpdate">修改车库信息
@@ -107,41 +106,51 @@
                 <tr>
                     <td>#</td>
                     <td>名称</td>
-                    <td>位置</td>
-                    <td>价格</td>
-                    <td>类型</td>
-                    <td>状态</td>
+                    <td>面积</td>
+                    <td>深度</td>
+                    <td>品种</td>
+                    <td>密度</td>
+                    <td>含氧量</td>
+                    <td>氨氮含量</td>
+                    <td>ph值</td>
+                    <td>温度</td>
                     <td>操作</td>
                 </tr>
-                <c:forEach items="${sList}" var="csp" varStatus="id">
+                <c:forEach items="${pList}" var="csp" varStatus="id">
                     <tr>
                         <td>${id.count}</td>
-                        <td>${csp.s_name}</td>
-                        <td>${csp.s_location}</td>
-                        <td>${csp.s_price}元&nbsp;/&nbsp;${csp.s_pricetime}小时</td>
-                        <c:choose>
-                            <c:when test="${csp.s_type eq 1}">
-                                <td>小车位</td>
-                            </c:when>
-                            <c:when test="${csp.s_type eq 2}">
-                                <td>大车位</td>
-                            </c:when>
-                        </c:choose>
-                        <c:if test="${csp.s_state eq 0}">
-                            <td><span style="color: green; font-size: 8px">空闲</span></td>
-                        </c:if>
-                        <c:if test="${csp.s_state eq 1}">
-                            <td><span style="color: red; font-size: 8px">有车</span></td>
-                        </c:if>
+                        <td>${csp.poolName}</td>
+                        <td>${csp.poolArea}</td>
+                        <td>${csp.poolDeep}米</td>
+                        <td>${csp.poolType}</td>
+                        <td>${csp.poolDensity}</td>
+                        <td>${csp.poolDensity}</td>
+                        <td>${csp.poolDensity}</td>
+                        <td>${csp.poolDensity}</td>
+                        <td>${csp.poolDensity}</td>
+<%--                        <c:choose>--%>
+<%--                            <c:when test="${csp.s_type eq 1}">--%>
+<%--                                <td>小车位</td>--%>
+<%--                            </c:when>--%>
+<%--                            <c:when test="${csp.s_type eq 2}">--%>
+<%--                                <td>大车位</td>--%>
+<%--                            </c:when>--%>
+<%--                        </c:choose>--%>
+<%--                        <c:if test="${csp.s_state eq 0}">--%>
+<%--                            <td><span style="color: green; font-size: 8px">空闲</span></td>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${csp.s_state eq 1}">--%>
+<%--                            <td><span style="color: red; font-size: 8px">有车</span></td>--%>
+<%--                        </c:if>--%>
                         <td>
                             <button
-                                    onclick="carspaceInfo(${csp.s_id},'${csp.s_name}','${csp.s_location}',${csp.s_type},${csp.s_price},${csp.s_pricetime})"
+<%--                                    onclick="carspaceInfo(${csp.s_id},'${csp.s_name}','${csp.s_location}',${csp.s_type},${csp.s_price},${csp.s_pricetime})"--%>
                                     type="button"
                                     style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #4cae4c; color: white; font-size: 8px">
                                 修改
                             </button>
                             <button id="deleteCarspace"
-                                    onclick="deleteCarspace(${csp.s_id},${c.c_id},${c.c_total})"
+<%--                                    onclick="deleteCarspace(${csp.s_id},${c.c_id},${c.c_total})"--%>
                                     type="button"
                                     style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #f40; color: white; font-size: 8px">
                                 删除
@@ -150,9 +159,6 @@
                     </tr>
                 </c:forEach>
             </table>
-        </div>
-        <div class="col-md-7 text-right">
-            <itheima:page url="${pageContext.request.contextPath }/details.action"/>
         </div>
     </div>
 </div>
@@ -219,7 +225,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="add_carspaceInfo">
                     <div style="display: none">
-                        <input id="carstation_id" value="${c.c_id}"/>
+                        <input id="carstation_id" value="${c.id}"/>
                     </div>
                     <div class="form-group">
                         <label for="add_name" class="col-sm-2 control-label">名称</label>
@@ -355,47 +361,34 @@
                 </div>
                 <form class="form-horizontal" id="edit_carstationInfo">
                     <div style="display: none">
-                        <input value="${c.c_id}" id="edit_id"/>
+                        <input value="${c.id}" id="edit_id"/>
                     </div>
                     <div class="form-group">
                         <label for="edit_name" class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="edit_name"
-                                   value="${c.c_name}" name="name"/>
+                                   value="${c.poolCode}" name="name"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="edit_location" class="col-sm-2 control-label">位置</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="edit_location"
-                                   value="${c.c_location}" name="location"/>
+                                   value="${c.poolLocation}" name="location"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="edit_description" class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="edit_description"
-                                   value="${c.c_description} " name="description"/>
+                                   value="${c.poolRemark} " name="description"/>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_price" class="col-sm-2 control-label">车位价格</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="edit_price"
-                                   value="${c.c_price}" name="price"/>
-                        </div>
-                        <div class="col-sm-2">元/每</div>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="edit_time"
-                                   value="${c.c_pricetime }" name="time"/>
-                        </div>
-                        小时
                     </div>
                     <div class="form-group">
                         <label for="edit_total" class="col-sm-2 control-label">车位总数</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" id="edit_total"
-                                   readonly="readonly" value="${c.c_total}"/>
+                                   readonly="readonly" value="${c.poolTotal}"/>
                         </div>
                     </div>
                     <div class="modal-footer">

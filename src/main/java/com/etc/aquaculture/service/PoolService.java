@@ -45,6 +45,10 @@ public class PoolService {
         return poolArea;
     }
 
+    public List<PoolInfo> listPoolInfo(Long id){
+        return poolInfoRepository.findByPoolAreaId(id);
+    }
+
     public R listDetailByPoolId(Long id){
         return R.success(poolDetailRepository.findByPoolId(id + ""));
     }

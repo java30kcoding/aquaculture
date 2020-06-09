@@ -24,5 +24,10 @@ public class PoolInfo {
     private String poolDeep;
     private String poolType;
     private String poolDensity;
+    private String poolOxygen;
+    private String poolPh;
+    private String poolAmmonia;
+    private String poolTemperature;
+    private String poolCurrentTime;
 
 }

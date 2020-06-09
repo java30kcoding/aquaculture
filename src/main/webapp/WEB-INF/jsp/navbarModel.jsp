@@ -35,8 +35,8 @@
                     </c:if>
                     <c:if test="${USER_LOGIN.type eq 1}">
                         <li class="dropdown"><a
-                                href="<%=basePath%>carstationList.action"
-                                class="dropdown-toggle">车库管理</a></li>
+                                href="<%=basePath%>poolAreaList.action"
+                                class="dropdown-toggle">水库管理</a></li>
                     </c:if>
                     <c:if test="${USER_LOGIN.type eq 1}">
                         <li class="dropdown"><a
