@@ -560,7 +560,6 @@
     }
 
 </script>
-<script type="text/javascript" src="<%=basePath%>js/OCRcarNumber.js"></script>
 </body>
 </html>
 

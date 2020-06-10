@@ -49,7 +49,7 @@ public class PoolService {
 
     public Map<String, Object> getPoolCount(){
         Map<String, Object> poolInfo = Maps.newHashMap();
-        poolInfo.put("count", poolInfoRepository.count());
+        poolInfo.put("count", poolInfoRepository.countDistinct());
         return poolInfo;
     }
 
@@ -59,18 +59,25 @@ public class PoolService {
 
     public void savePoolInfo(PoolInfo poolInfo){
         //水库信息中总数 + 1
-        PoolArea poolArea = getPoolArea(poolInfo.getPoolAreaId());
-        poolArea.setPoolTotal(Integer.parseInt(poolArea.getPoolTotal()) + 1 + "");
-        updatePoolArea(poolArea);
+        List<PoolInfo> poolInfoList = poolInfoRepository.findByPoolName(poolInfo.getPoolName());
+        if (poolInfoList == null || poolInfoList.size() == 0) {
+            PoolArea poolArea = getPoolArea(poolInfo.getPoolAreaId());
+            poolArea.setPoolTotal(Integer.parseInt(poolArea.getPoolTotal()) + 1 + "");
+            updatePoolArea(poolArea);
+        }
         poolInfoRepository.save(poolInfo);
     }
 
     public void deletePoolInfo(Long id, Long areaId) {
-        //水库信息中总数 - 1
-        PoolArea poolArea = getPoolArea(areaId);
-        poolArea.setPoolTotal(Integer.parseInt(poolArea.getPoolTotal()) - 1 + "");
-        updatePoolArea(poolArea);
+        String poolName = poolInfoRepository.getOne(id).getPoolName();
         poolInfoRepository.deleteById(id);
+        //水库信息中总数 - 1
+        List<PoolInfo> poolInfoList = poolInfoRepository.findByPoolName(poolName);
+        if (poolInfoList == null && poolInfoList.size() == 0) {
+            PoolArea poolArea = getPoolArea(areaId);
+            poolArea.setPoolTotal(Integer.parseInt(poolArea.getPoolTotal()) - 1 + "");
+            updatePoolArea(poolArea);
+        }
     }
 
 }
