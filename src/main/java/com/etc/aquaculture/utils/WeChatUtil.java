@@ -37,14 +37,12 @@ public class WeChatUtil {
                                                     new WxMpTemplateData("exceptionInfo", value[2]));
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser("oBzWI6eDMruyxv3NyCFHwAn5Hkas")//要推送的用户openid
-                .toUser("oBzWI6d9Szd_o1YrHyGpHo5lXbAk")//要推送的用户openid
+//                .toUser("oBzWI6d9Szd_o1YrHyGpHo5lXbAk")
+//                .toUser("oBzWI6Wjyfhmwq9d6fh2-30Zcegg")
                 .data(data)
                 .url("http://localhost:8080/index.jsp")
                 .templateId("e0XRRVwN9KVWK-F0kKKCsOHa-6bcSG2aimP5i4hLF0g")//模版id
                 .build();
-        //3,如果是正式版发送模版消息，这里需要配置你的信息
-        //        templateMessage.addData(new WxMpTemplateData("name", "value", "#FF00FF"));
-        //                templateMessage.addData(new WxMpTemplateData(name2, value2, color2));
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
         } catch (Exception e) {

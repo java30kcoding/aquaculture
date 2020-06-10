@@ -51,15 +51,15 @@
 <!--导航栏开始-->
 <c:import url="navbarModel.jsp"></c:import>
 <!--主体信息开始-->
-<div class="container">
+<div class="container"style="background-color:white;border: 0">
 
-    <div class="row top">
-        <div class="panel panel-success">
+    <div class="row top" style="background-color:white;border: 0">
+        <div class="panel panel-success" style="background-color:white;border: 0">
             <!-- Default panel contents -->
-            <div class="panel-heading">
-                <form action="<%=basePath%>carInto.action" method="post">
+            <div class="panel-heading" style="background-color:white;border: 0">
+                <form action="<%=basePath%>poolInfo.action" method="post">
                     <div class="col-md-2 inputdiv">
-                        <select class="form-control sel" id="cid" name="cid">
+                        <select class="form-control sel" id="id" name="id">
                             <c:forEach items="${cs}" var="l">
                                 <option value="${l.id}">${l.poolCode}</option>
                             </c:forEach>
@@ -79,20 +79,15 @@
             </div>
         </div>
     </div>
-    <h3 style="color: #f40; margin-left: 20px">${c.poolCode}&nbsp;水库</h3>
-<%--    <img src="images/minCar.png" style="margin-left: 20px; height: 25px">：小池塘--%>
-<%--    <img src="images/maxCar.png" style="margin-left: 20px; height: 25px">：大池塘--%>
-<%--    <img src="images/green.png" style="margin-left: 20px; height: 20px">：无车--%>
-<%--    <img src="images/orange.png" style="margin-left: 20px; height: 20px">：有车--%>
-
-    <div class="poolall">
-        <div class="carlocation">
+    <h3 style="color: #68b4df; margin-left: 20px">${c.poolCode}&nbsp;水库</h3>
+    <div class="poolall"  style="background-image: url(images/back.jpg);height: 300px">
+        <div class="carlocation" style="background-color:rgba(225,225,225,0);border: 0">
             <c:forEach items="${c.poolInfoList}" var="s">
                 <!--循环池塘信息-->
-                    <div class="poolcss" onclick="parkCar(${s.id},${c.id},${USER_LOGIN.id},'${s.poolName}','${s.poolArea}',${s.poolDeep},${s.poolType},${s.poolDensity})">
-                        <img src="images/minCar.png" style="margin-top: 5px">
+                    <div class="poolcss">
+                        <img src="images/xiaoyu.png" style="margin-top: 5px;width: 50px;height: 30px">
                         <p>
-                                ${s.poolName}<br>${s.poolType}/${s.poolDensity}密度
+                                ${s.poolName}<br>${s.poolType}/${s.poolDensity}尾/亩
                         </p>
                     </div>
                     <div class="cardown"></div>

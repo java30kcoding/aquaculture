@@ -75,34 +75,41 @@
 <c:import url="navbarModel.jsp"></c:import>
 
 <!--主体信息开始-->
-<div class="container">
+<div class="container" >
     <div class="row">
-        <div class="col-md-12 column">
-            <div class="welcome">
+        <div class="col-md-12 column"style="background-color: white;border: 0">
+            <div class="welcome"style="background-color: white;border: 0">
                 <h2>"${c.poolCode}"&nbsp;水库池塘管理</h2>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row"  style="background-image: url(images/back.jpg);border-radius: 20px;border: 0">
 
-        <div class="panel panel-success">
+        <div class="panel panel-success" style="background-color: rgba(225,225,225,0)">
             <!-- Default panel contents -->
-            <div class="panel-heading">
+            <div style="width: 100px;height: 20px">
+
+            </div>
+            <div class="panel-heading" style="background-color: rgba(225,225,225,0.3);border-radius: 20px" >
                 <h4>${c.poolCode}</h4>
                 <p>
                     位置：${c.poolLocation}<br> 描述：${c.poolRemark}<br>
                     池塘总数：${c.poolTotal}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <br>
-                    <button style="background: #00B51D; color: white"
+                    <button style="background:rgba(225,225,225,0.4); color: white ;border: 0;border-radius: 5px"
                             data-toggle="modal" data-target="#myModalUpdate">修改水库信息
                     </button>
-                    <button style="background: #f40; color: white" data-toggle="modal"
+                    <button style="background:rgba(225,225,225,0.4); color: white ;border: 0;border-radius: 5px"
+                            data-toggle="modal"
                             data-target="#myModalAddCarspace">添加池塘
                     </button>
                 </p>
             </div>
+            <div style="width: 100px;height: 20px">
+
+            </div>
             <!-- Table -->
-            <table class="table">
+            <table class="table"style="background-color: rgba(225,225,225,0.3);border-radius: 20px">
                 <tr>
                     <td>#</td>
                     <td>名称</td>
@@ -147,13 +154,13 @@
                                     onclick="carspaceInfo(${csp.id},${c.id},'${csp.poolName}','${csp.poolArea}','${csp.poolDeep}','${csp.poolType}',
                                             '${csp.poolDensity}','${csp.poolOxygen}','${csp.poolAmmonia}','${csp.poolPh}','${csp.poolTemperature}')"
                                     type="button"
-                                    style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #4cae4c; color: white; font-size: 8px">
+                                    style="background: 37a; height: 25px; width: 40px; border-radius: 5px;background-color: rgba(211,211,211,0.3); color: white; font-size: 8px">
                                 修改
                             </button>
                             <button id="deleteCarspace"
                                     onclick="deleteCarspace(${csp.id},${c.id},${c.poolTotal})"
                                     type="button"
-                                    style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #f40; color: white; font-size: 8px">
+                                    style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background-color: rgba(211,211,211,0.3); color: white; font-size: 8px">
                                 删除
                             </button>
                         </td>
@@ -543,7 +550,7 @@
                 }
             }
         })
-    });
+    })
 
     $(function () {
         $("#edit_carspaceInfo").validate({
@@ -617,7 +624,7 @@
                 }
             }
         })
-    });
+    })
 
     $(function () {
         $("#add_carspaceInfo").validate({

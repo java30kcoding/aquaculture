@@ -76,24 +76,27 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12 column">
-            <div class="welcome">
+        <div class="col-md-12 column" >
+            <div class="welcome" style="background-color: white">
                 <h2>水库信息管理</h2>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="panel panel-success">
+    <div class="row" >
+
+        <div class="panel panel-success" style="border: 0">
+
             <!-- Default panel contents -->
-            <div class="panel-heading">
+            <div class="panel-heading"style="height:600px;background-image: url(images/back.jpg);border-radius: 40px">
+
                 <div style="margin-bottom: 20px">
                     <button type="button" class="btn btn-danger"
-                            style="background: #f40" data-toggle="modal"
+                            style="border: 0;background-color:rgba(211,211,211,0.3);border-radius: 10px;" data-toggle="modal"
                             data-target="#myModalAddCarStation">添加水库
                     </button>
                 </div>
-                <table class="table">
+                <table class="table" style="background-color:rgba(211,211,211,0.3);border-radius: 20px">
                     <tr>
                         <td>#</td>
                         <td>名称</td>
@@ -112,13 +115,13 @@
                             <td><a href="<%=basePath%>details.action?id=${csn.id}">
                                 <button
                                         type="button"
-                                        style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #4cae4c; color: white; font-size: 8px">
+                                        style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background-color: rgba(211,211,211,0.3); color: white; font-size: 8px">
                                     详情
                                 </button>
                             </a>
                                 <button id="deleteUser" type="button"
                                         onclick="deleteCarStation(${csn.id})"
-                                        style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background: #f40; color: white; font-size: 8px">
+                                        style="background: 37a; height: 25px; width: 40px; border-radius: 5px; background-color: rgba(211,211,211,0.3); color: white; font-size: 8px">
                                     删除
                                 </button>
                             </td>

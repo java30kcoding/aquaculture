@@ -35,9 +35,9 @@
 <!--欢迎语-->
 <div class="container">
     <div class="row">
-        <div class="col-md-12 column">
-            <div class="welcome">
-                <h2>${USER_LOGIN.name},清渠水产管理系统!</h2>
+        <div class="col-md-12 column" >
+            <div class="welcome" style="background-color: white">
+                <h2>${USER_LOGIN.name},欢迎登录清渠水产管理系统!</h2>
                 <p>${USER_LOGIN.say}</p>
                 <p id="system">
 						 当前池塘：<span class="redColor">${poolCount.count}个</span>&emsp;&emsp;监测池塘：<span
@@ -48,24 +48,25 @@
     </div>
 </div>
 <!--功能模块-->
-<div class="container two">
-    <div class="row">
-        <div class="col-md-11 column">
+<div class="container two"  style="background-image: url(images/back.jpg)">
 
-            <div class="col-md-1 column"></div>
+    <div class="row" >
+        <div class="col-md-11 column" >
+
+            <div class="col-md-1 column"></div><!--中间间隔-->
             <!--池塘查看-->
-            <div class="col-md-3 column" style="background: #f40;"
+            <div class="col-md-3 column" style="background-color:rgba(211,211,211,0.8);"
                  onclick="clickOut()">
-                <img src="images/logo-one.png">
+                <img src="images/yulogo.png" style="width: 50px">
                 <h2>池塘查看</h2>
                 <p>查看池塘信息和环境监测数据</p>
             </div>
 
 
-            <div class="col-md-1 column"></div>
+            <div class="col-md-1 column"></div><!--中间间隔-->
 
             <!--池塘录入-->
-            <div class="col-md-3 column" style="background: #00B51D"
+            <div class="col-md-3 column" style="background-color:rgba(211,211,211,0.8)"
                  onclick="parkCar()">
                 <img src="images/logo-two.png">
                 <h2>数据统计</h2>
@@ -76,9 +77,9 @@
 
             <!--池塘查询模块-->
             <form action="<%=basePath%>carInto.action">
-                <div class="col-md-3 column" style="background: #30A080"
+                <div class="col-md-3 column" style="background-color:rgba(211,211,211,0.8)"
                      onclick="search()">
-                    <img src="images/logo-three.png">
+                    <img src="images/gantanhao.png"style="width: 50px">
                     <h2>预警设置</h2>
                     <p>设置池塘监测阈值</p>
                 </div>
@@ -93,34 +94,6 @@
     <iframe width="700" scrolling="no" height="70" frameborder="0" allowtransparency="true"
             src="//i.tianqi.com/index.php?c=code&id=2&icon=1&py=xiamen&num=5&site=12"></iframe>
 </div>
-<!--公告信息展示模块-->
-<%--<div class="container" style="text-align: center">--%>
-<%--    <h4 style="border-radius: 10px;background: #71b3f7;color:white">公告</h4>--%>
-<%--</div>--%>
-<%--<c:forEach items="${ml}" var="m" varStatus="id">--%>
-<%--    <c:if test="${id.count mod 2 == 0}">--%>
-<%--        <div class="container four" style="margin-bottom: 30px;">--%>
-<%--            <div style="text-align: center;">--%>
-<%--                <h4 class="message-title" style="font-weight: bold;">${m.title}<span--%>
-<%--                        class="timeAndName">&emsp;&emsp;${m.user.name}&emsp;&emsp;</span><span--%>
-<%--                        class="timeAndName"><fmt:formatDate value="${m.creatTime}" pattern="yyyy-MM-dd HH-mm"/></span>--%>
-<%--                </h4>--%>
-<%--            </div>--%>
-<%--                ${m.content}--%>
-<%--        </div>--%>
-<%--    </c:if>--%>
-<%--    <c:if test="${id.count mod 2 != 0}">--%>
-<%--        <div class="container five">--%>
-<%--            <div style="text-align: center;">--%>
-<%--                <h4 class="message-title" style="font-weight: bold;">${m.title}<span--%>
-<%--                        class="timeAndName">&emsp;&emsp;${m.user.name}&emsp;&emsp;</span><span--%>
-<%--                        class="timeAndName"><fmt:formatDate value="${m.creatTime}" pattern="yyyy-MM-dd HH-mm"/></span>--%>
-<%--                </h4>--%>
-<%--            </div>--%>
-<%--                ${m.content}--%>
-<%--        </div>--%>
-<%--    </c:if>--%>
-<%--</c:forEach>--%>
 <c:import url="bottomModel.jsp"></c:import>
 <script type="text/javascript">
 
@@ -492,11 +465,11 @@
                         <label for="car_num" class="col-sm-3 control-label">池塘含氧量区间</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="pool_oxygen_min"
-                                    placeholder="最小含氧量" name="pool_oxygen_min"/>
+                                   value="${warning.poolOxygenMin}" placeholder="最小含氧量" name="pool_oxygen_min"/>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="pool_oxygen_max"
-                                    placeholder="最大含氧量" name="pool_oxygen_max"/>
+                                   value="${pool_oxygen_max}" placeholder="最大含氧量" name="pool_oxygen_max"/>
                         </div>
                     </div>
                     <div class="form-group">

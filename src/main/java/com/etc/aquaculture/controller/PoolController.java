@@ -53,8 +53,8 @@ public class PoolController {
 
     @RequestMapping(value = "poolInfo.action", method = RequestMethod.POST)
     public String carInto(int id, Model model) {
-        PoolArea cs = poolService.getPoolArea((long) id);
-        PoolArea c = poolService.listPoolInfo(cs);
+        List<PoolArea> cs = poolService.listPoolArea();
+        PoolArea c = poolService.listPoolInfo(poolService.getPoolArea((long) id));
         model.addAttribute("cs", cs);
         model.addAttribute("c", c);
         return "poolInfo";
