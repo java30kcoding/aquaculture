@@ -40,8 +40,7 @@
                 <h2>${USER_LOGIN.name},清渠水产管理系统!</h2>
                 <p>${USER_LOGIN.say}</p>
                 <p id="system">
-						<span class="label label-primary" onclick="systemState()"><a
-                                style="color: white">刷新</a></span><br> 当前池塘：<span class="redColor">${poolCount.count}个</span>&emsp;&emsp;监测池塘：<span
+						 当前池塘：<span class="redColor">${poolCount.count}个</span>&emsp;&emsp;监测池塘：<span
                         class="greenColor">${poolCount.count}个
                 </p>
             </div>
@@ -75,7 +74,7 @@
 
             <div class="col-md-1 column"></div>
 
-            <!--车位查询模块-->
+            <!--池塘查询模块-->
             <form action="<%=basePath%>carInto.action">
                 <div class="col-md-3 column" style="background: #30A080"
                      onclick="search()">
@@ -124,42 +123,48 @@
 <%--</c:forEach>--%>
 <c:import url="bottomModel.jsp"></c:import>
 <script type="text/javascript">
-    function systemState() {
+
+    function search() {
         $.ajax({
             async: false,
-            url: "${pageContext.request.contextPath}/systemState.action",
-            data: {},
+            url: "${pageContext.request.contextPath}/getWarning.action",
+            data: {
+                "id": $("#id").val(),
+                "poolOxygenMin": $("#pool_oxygen_min").val(),
+                "poolOxygenMax": $("#pool_oxygen_max").val(),
+                "poolArea": $("#poolInfo_poolArea").val(),
+                "poolDeep": $("#poolInfo_poolDeep").val(),
+                "poolType": $("#poolInfo_poolType").val(),
+                "poolDensity": $("#poolInfo_poolDensity").val(),
+                "poolOxygen": $("#poolInfo_poolOxygen").val(),
+                "poolPh": $("#poolInfo_poolPh").val(),
+                "poolAmmonia": $("#poolInfo_poolAmmonia").val(),
+                "poolTemperature": $("#poolInfo_poolTemperature").val()
+            },
             type: "POST",
             success: function (data) {
-                console.log(data);
-                var h = "<p id='system'><span class='label label-primary' onclick='systemState()'>刷新</span><br>当前停车：<span class='redColor'>" + data.pn + "辆</span>&emsp;&emsp;空余车位：<span class='greenColor'>" + data.np + "个</span><br>拥有车库：" + data.k + "个&emsp;&emsp;&emsp;拥有车位：" + data.all + "个</p>";
-                $("#system").html(h);
+                if (data == "OK") {
+                    // alert("修改池塘信息成功！");
+                    // window.location.reload();
+                } else {
+                    // alert("修改池塘信息失败！")
+                }
+                // $("#myModalCarspaceUpdate").modal('hide');
             },
             fail: function (e) {
-                alert("error");
+                alert("fail");
             },
             error: function (e) {
                 alert("error");
             }
         })
-    }
-
-    function search() {
         $("#myModalSearch").modal('show');
-        var mycars = new Array("京", "津", "沪", "渝", "冀", "豫", "云", "辽", "黑",
-            "湘", "皖", "鲁", "新", "苏", "浙", "赣", "鄂", "桂", "甘", "晋", "蒙",
-            "陕", "吉", "闽", "贵", "粤", "青", "藏", "川", "宁", "琼", "使", "领");
-        for (var i = 0; i < mycars.length; i++) {
-            $("#selectIdtwo").append(
-                "<option value='" + mycars[i] + "'>" + mycars[i]
-                + "</option>");
-        }
     }
 
     <%--function searchcaspace() {--%>
     <%--    var v = $("#carspacename").val();--%>
     <%--    if (v == "" || v == " " || v == null) {--%>
-    <%--        $("#error").html("<p style='color:red;margin-left:150px'>车位名不能为空</p>");--%>
+    <%--        $("#error").html("<p style='color:red;margin-left:150px'>池塘名不能为空</p>");--%>
     <%--        return;--%>
     <%--    } else {--%>
     <%--        $("#error").html("<p id='error'></p>")--%>
@@ -180,19 +185,19 @@
     <%--                    state = "无车";--%>
     <%--                }--%>
     <%--                if (data.s_type == 1) {--%>
-    <%--                    type = "小车位";--%>
+    <%--                    type = "小池塘";--%>
     <%--                } else {--%>
-    <%--                    type = "大车位";--%>
+    <%--                    type = "大池塘";--%>
     <%--                }--%>
-    <%--                var la = "<p>所属车库：" + data.carstation.c_name--%>
-    <%--                    + "<br>" + "车位名称：" + data.s_name--%>
-    <%--                    + "&emsp;&emsp;车位类型：" + type + "<br>"--%>
-    <%--                    + "车位价格：" + data.s_price + "元/"--%>
+    <%--                var la = "<p>所属水库：" + data.carstation.c_name--%>
+    <%--                    + "<br>" + "池塘名称：" + data.s_name--%>
+    <%--                    + "&emsp;&emsp;池塘类型：" + type + "<br>"--%>
+    <%--                    + "池塘价格：" + data.s_price + "元/"--%>
     <%--                    + data.s_pricetime + "小时<br>" + "目前状态："--%>
     <%--                    + state + "</p>";--%>
     <%--                $("#spaceInfo").html(la);--%>
     <%--            } else {--%>
-    <%--                $("#spaceInfo").html("<p style='color:red'>没有查询到该车位</p>");--%>
+    <%--                $("#spaceInfo").html("<p style='color:red'>没有查询到该池塘</p>");--%>
     <%--            }--%>
     <%--        },--%>
     <%--        fail: function (e) {--%>
@@ -271,8 +276,8 @@
                                     + "<br>"
                                     + "目前在："
                                     + cs.carstation.c_name
-                                    + "车库&emsp;"
-                                    + cs.s_name + "车位"
+                                    + "水库&emsp;"
+                                    + cs.s_name + "池塘"
                                     + "</p>";
                                 $("#orderInfo").html(la);
                             },
@@ -322,9 +327,9 @@
                                         var u = data.user;
                                         var type;
                                         if (c.s_type == 1) {
-                                            type = "小车位";
+                                            type = "小池塘";
                                         } else {
-                                            type = "大车位";
+                                            type = "大池塘";
                                         }
                                         var la = "<div id='oid' style='display:none;'>"
                                             + co.id
@@ -334,12 +339,12 @@
                                             + "·"
                                             + co.carNumber
                                             + "</em><br>"
-                                            + "<strong>车库：</strong><em>"
+                                            + "<strong>水库：</strong><em>"
                                             + c.carstation.c_name
-                                            + "</em>&emsp;&emsp;&emsp;<strong>车位：</strong><em>"
+                                            + "</em>&emsp;&emsp;&emsp;<strong>池塘：</strong><em>"
                                             + c.s_name
                                             + "</em><br>"
-                                            + "<strong>车位类型:</strong><em>"
+                                            + "<strong>池塘类型:</strong><em>"
                                             + type
                                             + "</em><br>"
                                             + "<strong>入库时间:</strong><em>"
@@ -456,8 +461,8 @@
                             <div class="panel-heading">
                                 <p id="carCost" style="line-height: 25px">
                                     <strong>车牌号：</strong><em>&emsp;&emsp;</em><br>
-                                    <strong>车库：</strong><em>&emsp;&emsp;</em>&emsp;&emsp;&emsp;<strong>车位：</strong><em>&emsp;&emsp;</em><br>
-                                    <strong>车位类型:</strong><em>&emsp;&emsp;</em><br> <strong>入库时间:</strong><em>&emsp;&emsp;</em>&emsp;&emsp;&emsp;<strong>出库时间:</strong><em>&emsp;&emsp;</em><br>
+                                    <strong>水库：</strong><em>&emsp;&emsp;</em>&emsp;&emsp;&emsp;<strong>池塘：</strong><em>&emsp;&emsp;</em><br>
+                                    <strong>池塘类型:</strong><em>&emsp;&emsp;</em><br> <strong>入库时间:</strong><em>&emsp;&emsp;</em>&emsp;&emsp;&emsp;<strong>出库时间:</strong><em>&emsp;&emsp;</em><br>
                                     <strong>价格：</strong><em>&emsp;&emsp;</em>&emsp;&emsp;&emsp;<strong>停车时间：</strong><em>&emsp;&emsp;</em><br>
                                     <strong>操作人:</strong><em>&emsp;&emsp;</em>&emsp;&emsp;&emsp;<strong>工号：</strong><em>&emsp;&emsp;</em><br>
                                     <strong>总计:</strong><strong style="color: red">&emsp;&emsp;</strong><br>
@@ -483,57 +488,50 @@
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">搜索</h4>
-            </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="searchInfo">
-                    <p id="carspaceInfo"></p>
                     <div class="form-group">
-                        <label for="car_num" class="col-sm-3 control-label">车牌号</label>
-                        <div class="col-sm-2">
-                            <select class="form-control sel" id="selectIdtwo"
-                                    name="selectId">
-                            </select>
+                        <label for="car_num" class="col-sm-3 control-label">池塘含氧量区间</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_oxygen_min"
+                                   value="${warning.poolOxygenMin}" placeholder="最小含氧量" name="pool_oxygen_min"/>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="car_numtwo"
-                                   placeholder="输入车牌号码" name="car_numtwo"/>
-                        </div>
-                        <button class="col-sm-2"
-                                style="display: block; padding: 0; background: #f40; width: 40px; text-align: center; border-radius: 5px; color: white; margin-top: 5px;">
-                            搜索
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <div class="panel panel-success"
-                             style="display: block; width: 450px; margin-left: 80px">
-                            <div class="panel-heading">
-                                <p id="orderInfo" style="line-height: 25px"></p>
-                            </div>
+                            <input type="text" class="form-control" id="pool_oxygen_max"
+                                   value="${pool_oxygen_max}" placeholder="最大含氧量" name="pool_oxygen_max"/>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="carpace" class="col-sm-3 control-label">车位名</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="carspacename"
-                                   placeholder="输入车位名" name="carspacename"/>
+                        <label for="car_num" class="col-sm-3 control-label">池塘ph值区间</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_ph_min"
+                                   placeholder="最小ph值" name="pool_ph_min"/>
                         </div>
-                        <span class="col-sm-3" onclick="searchcaspace()"
-                              style="display: block; padding: 0; background: #f40; width: 40px; text-align: center; border-radius: 5px; color: white; margin-top: 5px;">搜索</span>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_ph_max"
+                                   placeholder="最大ph值" name="pool_ph_max"/>
+                        </div>
                     </div>
-                    <p id="error"></p>
                     <div class="form-group">
-                        <div class="panel panel-success"
-                             style="width: 450px; margin-left: 80px">
-                            <div class="panel-heading">
-                                <p id="spaceInfo" style="line-height: 25px"></p>
-                            </div>
+                        <label for="car_num" class="col-sm-3 control-label">池塘含氨氮量区间</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_ammonia_min"
+                                   placeholder="最小含氨氮量" name="pool_ammonia_min"/>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_ammonia_max"
+                                   placeholder="最大含氨氮量" name="pool_ammonia_max"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="car_num" class="col-sm-3 control-label">池塘温度区间</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_temperature_min"
+                                   placeholder="最低温度" name="pool_temperature_min"/>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="pool_temperature_max"
+                                   placeholder="最高温度" name="pool_temperature_max"/>
                         </div>
                     </div>
                     <div class="modal-footer">

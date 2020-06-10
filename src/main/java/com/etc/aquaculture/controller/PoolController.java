@@ -2,12 +2,14 @@ package com.etc.aquaculture.controller;
 
 import com.etc.aquaculture.common.R;
 import com.etc.aquaculture.pojo.PoolArea;
+import com.etc.aquaculture.pojo.PoolInfo;
 import com.etc.aquaculture.service.PoolService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +24,12 @@ public class PoolController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(){
-        return "hello";
+        return "index";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index1(){
+        return "index";
     }
 
     /**
@@ -33,17 +40,6 @@ public class PoolController {
     @RequestMapping("/listAll")
     public R listAll(){
         return poolService.listAll();
-    }
-
-    /**
-     * 获取指定池塘的详细参数
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping("/listDetail")
-    public R listDetailByPoolId(@RequestParam Long id){
-        return poolService.listDetailByPoolId(id);
     }
 
     @RequestMapping(value = "poolInfo.action", method = RequestMethod.GET)
@@ -78,6 +74,45 @@ public class PoolController {
         model.addAttribute("pList", c.getPoolInfoList());
         model.addAttribute("c", c);
         return "poolDetails";
+    }
+
+    @RequestMapping(value = "addPoolArea.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String addPoolArea(PoolArea poolArea) {
+        //默认总数为0
+        poolArea.setPoolTotal("0");
+        poolService.updatePoolArea(poolArea);
+        return "OK";
+    }
+
+    @RequestMapping(value = "updatePoolArea.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String updatePoolArea(PoolArea poolArea) {
+        poolService.updatePoolArea(poolArea);
+        return "OK";
+    }
+
+    @RequestMapping(value = "addPoolInfo.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String addPoolInfo(PoolInfo poolInfo) {
+        poolInfo.setPoolCurrentTime(new Date());
+        poolService.savePoolInfo(poolInfo);
+        return "OK";
+    }
+
+    @RequestMapping(value = "updatePoolInfo.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String updatePoolInfo(PoolInfo poolInfo) {
+        poolInfo.setPoolCurrentTime(new Date());
+        poolService.savePoolInfo(poolInfo);
+        return "OK";
+    }
+
+    @RequestMapping(value = "deletePoolInfo.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String deletePoolInfo(long id, long areaId) {
+        poolService.deletePoolInfo(id, areaId);
+        return "OK";
     }
 
 }

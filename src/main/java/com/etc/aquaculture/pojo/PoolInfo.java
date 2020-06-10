@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author yuanyl
@@ -28,6 +29,6 @@ public class PoolInfo {
     private String poolPh;
     private String poolAmmonia;
     private String poolTemperature;
-    private String poolCurrentTime;
+    private Date poolCurrentTime;
 
 }

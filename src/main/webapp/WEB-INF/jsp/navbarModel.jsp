@@ -30,21 +30,10 @@
                 <ul class="nav navbar-nav" style="padding: 10px">
                     <li><a href="<%=basePath%>admin.action">首页</a></li>
                     <c:if test="${USER_LOGIN.type eq 1}">
-                        <li class="dropdown"><a href="<%=basePath%>employee.action"
-                                                class="dropdown-toggle">人员管理</a></li>
-                    </c:if>
-                    <c:if test="${USER_LOGIN.type eq 1}">
                         <li class="dropdown"><a
                                 href="<%=basePath%>poolAreaList.action"
                                 class="dropdown-toggle">水库管理</a></li>
                     </c:if>
-                    <c:if test="${USER_LOGIN.type eq 1}">
-                        <li class="dropdown"><a
-                                href="<%=basePath%>message.action"
-                                class="dropdown-toggle">发布公告</a></li>
-                    </c:if>
-                    <li class="dropdown"><a href="<%=basePath%>today.action"
-                                            class="dropdown-toggle">今日工作</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" style="padding: 6px">
                     <li><a><img

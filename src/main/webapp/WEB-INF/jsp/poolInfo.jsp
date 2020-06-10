@@ -27,7 +27,7 @@
             src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<%=basePath%>css/carInto.css"
           type="text/css">
-    <title>寻找车位</title>
+    <title>寻找池塘</title>
     <style type="text/css">
         .orderParkInfo {
             margin-left: 30px;
@@ -72,7 +72,7 @@
                     </div>
                 </form>
                 <p>
-                    名称：${c.poolCode}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车位总数：${c.poolTotal}<br>位置：${c.poolLocation}<br>
+                    名称：${c.poolCode}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;池塘总数：${c.poolTotal}<br>位置：${c.poolLocation}<br>
                     描述：${c.poolRemark}
 
                 </p>
@@ -80,8 +80,8 @@
         </div>
     </div>
     <h3 style="color: #f40; margin-left: 20px">${c.poolCode}&nbsp;水库</h3>
-<%--    <img src="images/minCar.png" style="margin-left: 20px; height: 25px">：小车位--%>
-<%--    <img src="images/maxCar.png" style="margin-left: 20px; height: 25px">：大车位--%>
+<%--    <img src="images/minCar.png" style="margin-left: 20px; height: 25px">：小池塘--%>
+<%--    <img src="images/maxCar.png" style="margin-left: 20px; height: 25px">：大池塘--%>
 <%--    <img src="images/green.png" style="margin-left: 20px; height: 20px">：无车--%>
 <%--    <img src="images/orange.png" style="margin-left: 20px; height: 20px">：有车--%>
 
@@ -139,11 +139,11 @@
         }
         var t;
         if (type == 1) {
-            t = "小车位";
+            t = "小池塘";
         } else {
-            t = "大车位";
+            t = "大池塘";
         }
-        $("#carspaceInfo").html("<p style='color:#f40;margin-left:30px'>车位名称：" + name + "&nbsp;&nbsp;&nbsp;&nbsp;车位位置：" + location + "<br>车位类型：" + t + "&nbsp;&nbsp;&nbsp;&nbsp;车位价格：" + price + "元/" + pricetime + "小时</p>")
+        $("#carspaceInfo").html("<p style='color:#f40;margin-left:30px'>池塘名称：" + name + "&nbsp;&nbsp;&nbsp;&nbsp;池塘位置：" + location + "<br>池塘类型：" + t + "&nbsp;&nbsp;&nbsp;&nbsp;池塘价格：" + price + "元/" + pricetime + "小时</p>")
     }
 
     $.validator.addMethod("checkCarNumber", function (value, element) {

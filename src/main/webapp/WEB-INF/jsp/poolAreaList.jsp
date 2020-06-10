@@ -90,7 +90,7 @@
                 <div style="margin-bottom: 20px">
                     <button type="button" class="btn btn-danger"
                             style="background: #f40" data-toggle="modal"
-                            data-target="#myModalAddCarStation">添加车库
+                            data-target="#myModalAddCarStation">添加水库
                     </button>
                 </div>
                 <table class="table">
@@ -138,55 +138,35 @@
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">添加车库</h4>
+                <h4 class="modal-title" id="myModalLabel">添加水库</h4>
             </div>
 
             <div class="modal-body">
                 <div class="form-group">
                     <p style="color: red; font-size: 5px">
-                        *注意：车位的默认名称为"车库名+数字"，例如"A1--1"。车位"位置"默认为空。车位类型默认为"小车位"。(车库和车位信息可点击"详情"，跳转后查看和修改)</p>
+                        *注意：池塘的默认名称为"水库名+数字"，例如"A1--1"。</p>
                 </div>
                 <form class="form-horizontal" id="edit_carstationInfo">
                     <div class="form-group">
                         <label for="edit_name" class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="edit_name"
-                                   placeholder="输入车库的名称" name="name"/>
+                                   placeholder="输入水库的名称" name="name"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="edit_location" class="col-sm-2 control-label">位置</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="edit_location"
-                                   placeholder="输入车库的位置  " name="location"/>
+                                   placeholder="输入水库的位置  " name="location"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="edit_descroption" class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="edit_description"
-                                   placeholder="输入车库描述(可以不填)  " name="description"/>
+                                   placeholder="输入水库描述(可以不填)  " name="description"/>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_total" class="col-sm-2 control-label">车位总数</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="edit_total"
-                                   placeholder="输入车位数量" name="total"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_price" class="col-sm-2 control-label">车位价格</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="edit_price"
-                                   placeholder="价格" name="price"/>
-                        </div>
-                        <div class="col-sm-2">元/每</div>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="edit_time"
-                                   placeholder="时间" name="time"/>
-                        </div>
-                        小时
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default"
@@ -256,15 +236,15 @@
             },
             messages: {
                 "name": {
-                    "required": "车库名称不能为空",
-                    "rangelength": "车库名称长度为2-12位",
+                    "required": "水库名称不能为空",
+                    "rangelength": "水库名称长度为2-12位",
                 },
                 "location": {
                     "required": "位置描述不能为空"
                 },
                 "total": {
-                    "required": "车位总数不能为空",
-                    "digits": "车位总数为整数"
+                    "required": "池塘总数不能为空",
+                    "digits": "池塘总数为整数"
                 },
                 "price": {
                     "required": "价格不能为空",
@@ -281,22 +261,19 @@
                 if (confirm('确定要提交已编辑的信息吗?')) {
                     $.ajax({
                         async: false,
-                        url: "${pageContext.request.contextPath}/addCarStation.action",
+                        url: "${pageContext.request.contextPath}/addPoolArea.action",
                         data: {
-                            "name": $("#edit_name").val(),
-                            "location": $("#edit_location").val(),
-                            "description": $("#edit_description").val(),
-                            "total": $("#edit_total").val(),
-                            "price": $("#edit_price").val(),
-                            "time": $("#edit_time").val()
+                            "poolCode": $("#edit_name").val(),
+                            "poolLocation": $("#edit_location").val(),
+                            "poolRemark": $("#edit_description").val()
                         },
                         type: "POST",
                         success: function (data) {
                             if (data == "OK") {
-                                alert("添加车库成功！");
+                                alert("添加水库成功！");
                                 window.location.reload();
                             } else {
-                                alert("添加车库失败！")
+                                alert("添加水库失败！")
                             }
                             $("#myModalAddCarStation").modal('hide');
                         },
