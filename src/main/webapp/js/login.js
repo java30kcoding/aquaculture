@@ -73,11 +73,11 @@ $(function () {
         rules: {
             "username": {
                 "required": true,
-                "rangelength": [6, 12]
+                "rangelength": [4, 12]
             },
             "password": {
                 "required": true,
-                "rangelength": [6, 12]
+                "rangelength": [4, 16]
             },
             "input": {
                 "required": true,
@@ -87,11 +87,11 @@ $(function () {
         messages: {
             "username": {
                 "required": "用户名不能为空",
-                "rangelength": "用户名长度为6-12位"
+                "rangelength": "用户名长度为4-12位"
             },
             "password": {
                 "required": "密码不能为空",
-                "rangelength": "密码长度6-12位"
+                "rangelength": "密码长度4-16位"
             },
             "input": {
                 "required": "验证码不能为空",

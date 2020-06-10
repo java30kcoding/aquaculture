@@ -543,7 +543,7 @@
                 }
             }
         })
-    })
+    });
 
     $(function () {
         $("#edit_carspaceInfo").validate({
@@ -617,7 +617,7 @@
                 }
             }
         })
-    })
+    });
 
     $(function () {
         $("#add_carspaceInfo").validate({

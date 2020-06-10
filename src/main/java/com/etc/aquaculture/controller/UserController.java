@@ -26,12 +26,7 @@ public class UserController {
     @Resource
     UserService userService;
 
-    @RequestMapping("/register")
-    public R register(@RequestBody User user){
-        return userService.register(user);
-    }
-
-    @RequestMapping("/login.action")
+    @RequestMapping(value = "/login.action", method = RequestMethod.POST)
     public String login(User user, Model model, HttpSession session){
         User login = userService.login(user);
         if (login != null) {
@@ -39,7 +34,7 @@ public class UserController {
             return "redirect:admin.action";
         } else {
             model.addAttribute("msg", "账号或密码错误，请重新输入！");
-            return "redirect:error.action";
+            return "redirect:login.action";
         }
     }
 
@@ -50,8 +45,13 @@ public class UserController {
         return "redirect:login.action";
     }
 
-
-
-
+    @RequestMapping(value = "login.action", method = RequestMethod.GET)
+    public String login(HttpServletRequest request, Model model) {
+        String msg = request.getParameter("msg");
+        if (msg != null) {
+            model.addAttribute("msg", msg);
+        }
+        return "login";
+    }
 
 }

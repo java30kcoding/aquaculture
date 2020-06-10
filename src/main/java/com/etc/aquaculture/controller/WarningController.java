@@ -42,4 +42,9 @@ public class WarningController {
         return "OK";
     }
 
+    @RequestMapping("/test")
+    public void test(){
+        warningService.warningByCorn();
+    }
+
 }

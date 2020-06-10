@@ -19,7 +19,6 @@ import java.util.Map;
 @Service
 public class PoolService {
 
-
     @Resource
     PoolInfoRepository poolInfoRepository;
     @Resource

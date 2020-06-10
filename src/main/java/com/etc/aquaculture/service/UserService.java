@@ -21,19 +21,6 @@ public class UserService {
     @Resource
     UserRepository userRepository;
 
-    public R register(User user){
-        if (StringUtils.isEmpty(user.getUsername())) {
-            return R.fail("用户名不能为空");
-        } else if (StringUtils.isEmpty(user.getPassword())) {
-            return R.fail("密码不能为空");
-        } else {
-            //Md5加密用户密码
-            user.setPassword(Md5Utils.encode(user.getPassword()));
-            userRepository.save(user);
-            return R.success();
-        }
-    }
-
     public User login(User user){
         User byUserNameAndUserPassword = userRepository.
                 findByUsernameAndPassword(user.getUsername(), Md5Utils.encode(user.getPassword()));
