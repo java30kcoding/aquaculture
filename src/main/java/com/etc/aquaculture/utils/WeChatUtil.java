@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 微信公众号推送工具类
  *
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/10 17:46
  **/
 @Component
@@ -36,12 +36,12 @@ public class WeChatUtil {
                                                     new WxMpTemplateData("poolInfo", value[1]),
                                                     new WxMpTemplateData("exceptionInfo", value[2]));
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser("oBzWI6eDMruyxv3NyCFHwAn5Hkas")//要推送的用户openid
+                .toUser("oBzWI6WYWRyTV6_1XE4gp5eBvowk")//要推送的用户openid
 //                .toUser("oBzWI6d9Szd_o1YrHyGpHo5lXbAk")
 //                .toUser("oBzWI6Wjyfhmwq9d6fh2-30Zcegg")
                 .data(data)
-                .url("http://localhost:8080/index.jsp")
-                .templateId("e0XRRVwN9KVWK-F0kKKCsOHa-6bcSG2aimP5i4hLF0g")//模版id
+                .url("http://localhost:8088/index.jsp")
+                .templateId("kH6SJASnykj5jQn9cnUPaWTxVd3Ex0kAwBxXWJ1i0G0")//模版id
                 .build();
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);

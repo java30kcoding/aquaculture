@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 
 /**
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/8 22:34
  **/
 @Controller

@@ -16,3 +16,5 @@ spring:
   thymeleaf:
     cache: false
     enabled: false
+server:
+  port: 8088

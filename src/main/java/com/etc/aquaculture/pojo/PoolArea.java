@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/9 16:34
  **/
 @Entity

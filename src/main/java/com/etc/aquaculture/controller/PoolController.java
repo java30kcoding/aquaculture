@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/8 17:27
  **/
 @Controller
@@ -21,16 +21,6 @@ public class PoolController {
 
     @Resource
     PoolService poolService;
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(){
-        return "index";
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index1(){
-        return "index";
-    }
 
     /**
      * 获取所有的池塘信息

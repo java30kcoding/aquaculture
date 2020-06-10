@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/9 15:45
  **/
 @Component

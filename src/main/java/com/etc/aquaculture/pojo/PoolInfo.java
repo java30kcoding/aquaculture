@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/8 17:27
  **/
 @Entity

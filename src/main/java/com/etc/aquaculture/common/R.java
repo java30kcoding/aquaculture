@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 响应实体封装
  *
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/8 16:45
  **/
 @Data

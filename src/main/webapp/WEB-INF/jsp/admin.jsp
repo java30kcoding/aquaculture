@@ -459,7 +459,18 @@
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">设置预警阈值</h4>
+            </div>
             <div class="modal-body">
+                <div class="form-group">
+                    <p style="color: red; font-size: 5px">
+                        *注意：当池塘参数不再预警区间内时会报警。</p>
+                </div>
                 <form class="form-horizontal" id="poolWarningInfo">
                     <div class="form-group">
                         <label for="car_num" class="col-sm-3 control-label">池塘含氧量区间</label>

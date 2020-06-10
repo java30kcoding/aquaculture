@@ -8,7 +8,7 @@ import javax.persistence.*;
 /**
  * 用户实体类
  *
- * @author yuanyl
+ * @author yanxq
  * @date 2020/6/8 16:30
  **/
 @Entity
