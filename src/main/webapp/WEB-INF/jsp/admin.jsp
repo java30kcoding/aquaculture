@@ -169,53 +169,43 @@
         $("#myModalSearch").modal('show');
     }
 
-    <%--function searchcaspace() {--%>
-    <%--    var v = $("#carspacename").val();--%>
-    <%--    if (v == "" || v == " " || v == null) {--%>
-    <%--        $("#error").html("<p style='color:red;margin-left:150px'>池塘名不能为空</p>");--%>
-    <%--        return;--%>
-    <%--    } else {--%>
-    <%--        $("#error").html("<p id='error'></p>")--%>
-    <%--    }--%>
-    <%--    $.ajax({--%>
-    <%--        async: false,--%>
-    <%--        url: "${pageContext.request.contextPath}/searchcaspace.action",--%>
-    <%--        data: {--%>
-    <%--            "carspacename": $("#carspacename").val()--%>
-    <%--        },--%>
-    <%--        type: "POST",--%>
-    <%--        success: function (data) {--%>
-    <%--            if (data.s_name != null) {--%>
-    <%--                var state, type;--%>
-    <%--                if (data.s_state == 1) {--%>
-    <%--                    state = "有车";--%>
-    <%--                } else {--%>
-    <%--                    state = "无车";--%>
-    <%--                }--%>
-    <%--                if (data.s_type == 1) {--%>
-    <%--                    type = "小池塘";--%>
-    <%--                } else {--%>
-    <%--                    type = "大池塘";--%>
-    <%--                }--%>
-    <%--                var la = "<p>所属水库：" + data.carstation.c_name--%>
-    <%--                    + "<br>" + "池塘名称：" + data.s_name--%>
-    <%--                    + "&emsp;&emsp;池塘类型：" + type + "<br>"--%>
-    <%--                    + "池塘价格：" + data.s_price + "元/"--%>
-    <%--                    + data.s_pricetime + "小时<br>" + "目前状态："--%>
-    <%--                    + state + "</p>";--%>
-    <%--                $("#spaceInfo").html(la);--%>
-    <%--            } else {--%>
-    <%--                $("#spaceInfo").html("<p style='color:red'>没有查询到该池塘</p>");--%>
-    <%--            }--%>
-    <%--        },--%>
-    <%--        fail: function (e) {--%>
-    <%--            alert("fail");--%>
-    <%--        },--%>
-    <%--        error: function (e) {--%>
-    <%--            alert("error");--%>
-    <%--        }--%>
-    <%--    })--%>
-    <%--}--%>
+    $(function () {
+        $("#poolWarningInfo").validate({
+            submitHandler: function (form) {
+                if (confirm('确定要提交已编辑的信息吗?')) {
+                    $.ajax({
+                        async: false,
+                        url: "${pageContext.request.contextPath}/updateWarning.action",
+                        data: {
+                            "poolOxygenMin": $("#pool_oxygen_min").val(),
+                            "poolOxygenMax": $("#pool_oxygen_max").val(),
+                            "poolPhMin": $("#pool_ph_min").val(),
+                            "poolPhMax": $("#pool_ph_max").val(),
+                            "poolAmmoniaMin": $("#pool_ammonia_min").val(),
+                            "poolAmmoniaMax": $("#pool_ammonia_max").val(),
+                            "poolTemperatureMin": $("#pool_temperature_min").val(),
+                            "poolTemperatureMax": $("#pool_temperature_max").val(),
+                        },
+                        type: "POST",
+                        success: function (data) {
+                            if (data == "OK") {
+                                alert("修改预警阈值成功！");
+                            } else {
+                                alert("修改预警阈值失败！")
+                            }
+                            $("#poolWarningInfo").modal('hide');
+                        },
+                        fail: function (e) {
+                            alert("fail");
+                        },
+                        error: function (e) {
+                            alert("error");
+                        }
+                    })
+                }
+            }
+        })
+    })
 
     function parkCar() {
         $("#myModalCarOut").modal('show');
@@ -497,16 +487,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form class="form-horizontal" id="searchInfo">
+                <form class="form-horizontal" id="poolWarningInfo">
                     <div class="form-group">
                         <label for="car_num" class="col-sm-3 control-label">池塘含氧量区间</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="pool_oxygen_min"
-                                   value="${warning.poolOxygenMin}" placeholder="最小含氧量" name="pool_oxygen_min"/>
+                                    placeholder="最小含氧量" name="pool_oxygen_min"/>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="pool_oxygen_max"
-                                   value="${pool_oxygen_max}" placeholder="最大含氧量" name="pool_oxygen_max"/>
+                                    placeholder="最大含氧量" name="pool_oxygen_max"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -543,11 +533,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default">保存
-                        </button>
                         <button type="button" class="btn btn-default"
                                 data-dismiss="modal">关闭
                         </button>
+                        <button type="submit" class="btn btn-primary" id="add">保存</button>
                     </div>
                 </form>
             </div>

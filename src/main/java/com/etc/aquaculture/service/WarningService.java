@@ -20,4 +20,9 @@ public class WarningService {
         return warningRepository.getOne(1L);
     }
 
+    public Warning updateWarning(Warning warning){
+        warning.setId(1L);
+        return warningRepository.save(warning);
+    }
+
 }
