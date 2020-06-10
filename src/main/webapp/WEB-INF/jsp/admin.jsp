@@ -127,11 +127,11 @@
     function search() {
         $.ajax({
             async: false,
-            url: "${pageContext.request.contextPath}/getWarning.action",
+            url: "<%=basePath%>getWarning.action",
             data: {
                 "id": $("#id").val(),
                 "poolOxygenMin": $("#pool_oxygen_min").val(),
-                "poolOxygenMax": $("#pool_oxygen_max").val(),
+                "poolOxygenMax": $("#pool_osearchInfoxygen_max").val(),
                 "poolArea": $("#poolInfo_poolArea").val(),
                 "poolDeep": $("#poolInfo_poolDeep").val(),
                 "poolType": $("#poolInfo_poolType").val(),
@@ -142,8 +142,16 @@
                 "poolTemperature": $("#poolInfo_poolTemperature").val()
             },
             type: "POST",
-            success: function (data) {
-                if (data == "OK") {
+            success: function (data,model) {
+                if (data.state == "1") {
+                    $("#pool_oxygen_min").val(data.data.poolOxygenMin);
+                    $("#pool_oxygen_max").val(data.data.poolOxygenMax);
+                    $("#pool_ph_min").val(data.data.poolPhMin);
+                    $("#pool_ph_max").val(data.data.poolPhMax);
+                    $("#pool_ammonia_min").val(data.data.poolAmmoniaMin);
+                    $("#pool_ammonia_max").val(data.data.poolAmmoniaMax);
+                    $("#pool_temperature_min").val(data.data.poolTemperatureMin);
+                    $("#pool_temperature_max").val(data.data.poolTemperatureMax);
                     // alert("修改池塘信息成功！");
                     // window.location.reload();
                 } else {
@@ -535,6 +543,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default">保存
+                        </button>
                         <button type="button" class="btn btn-default"
                                 data-dismiss="modal">关闭
                         </button>
