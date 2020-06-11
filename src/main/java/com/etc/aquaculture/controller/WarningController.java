@@ -2,6 +2,7 @@ package com.etc.aquaculture.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.etc.aquaculture.pojo.JsonResult;
+import com.etc.aquaculture.pojo.Series;
 import com.etc.aquaculture.pojo.Warning;
 import com.etc.aquaculture.service.WarningService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -43,10 +46,10 @@ public class WarningController {
         return "OK";
     }
 
-    @RequestMapping("/test")
-    public void test(){
-        warningService.warningByCorn();
-    }
+//    @RequestMapping("/test")
+//    public void test(){
+//        warningService.warningByCorn();
+//    }
 
 
 
@@ -63,21 +66,28 @@ public class WarningController {
         private String poolPh;
         private String poolAmmonia;
         private String poolTemperature;
-        private Date poolCurrentTime;
-
-        public PoolInfos(){
+        private String poolCurrentTime;
+        public PoolInfos(){}
+        public PoolInfos(int i){
             id = 2L;
             poolAreaId = 2L;
-            poolName = "2";
-            poolArea = "2";
-            poolDeep = "2";
-            poolType = "2";
-            poolDensity = "2";
-            poolOxygen = "2";
-            poolPh = "2";
-            poolAmmonia = "2";
-            poolTemperature = "2";
-            poolCurrentTime = new Date();
+            poolName = "3";
+            poolArea = "4";
+            poolDeep = "5";
+            poolType = "6";
+            poolDensity = "7";
+            poolOxygen = "8";
+            poolPh = "9";
+            poolAmmonia = "10";
+            poolTemperature = "11";
+            SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS" );
+            Date date = new Date();
+            Calendar calendar = new GregorianCalendar();
+            calendar.setTime(date);
+            calendar.add(Calendar.DATE, i);
+            date = calendar.getTime();
+            poolCurrentTime  = sdf.format(date);
+
         }
 
         public Long getId() {
@@ -168,11 +178,11 @@ public class WarningController {
             this.poolTemperature = poolTemperature;
         }
 
-        public Date getPoolCurrentTime() {
+        public String getPoolCurrentTime() {
             return poolCurrentTime;
         }
 
-        public void setPoolCurrentTime(Date poolCurrentTime) {
+        public void setPoolCurrentTime(String poolCurrentTime) {
             this.poolCurrentTime = poolCurrentTime;
         }
     }
@@ -181,10 +191,50 @@ public class WarningController {
     public String test(Model model) {
         List<PoolInfos> poolInfos = new ArrayList<>();
         for (int i = 0 ; i < 5 ;i++){
-            poolInfos.add(new PoolInfos());
+            poolInfos.add(new PoolInfos(i));
         }
         model.addAttribute("poolInfos", JSON.toJSONString(poolInfos));
+        List<String> poolNameList = new ArrayList<>();
+        List<String> timeList = new ArrayList<>();
+        List<String> namelist = new ArrayList<>();
+        for (int i = 0 ; i < 5 ;i++){
+            poolNameList.add(poolInfos.get(i).getPoolName()+i);
+            timeList.add(poolInfos.get(i).getPoolCurrentTime()+i);
+        }
+        namelist.add("第一水库");
+        namelist.add("第二水库");
+        namelist.add("第三水库");
+        model.addAttribute("timeList", timeList);
+        model.addAttribute("poolNameList", poolNameList);
+        model.addAttribute("namelist", namelist);
+
+
+
+
+        List<Series> seriesList = new ArrayList<>();
+        for (int i = 0 ; i  < namelist.size() ; i++){
+            Series series = new Series();
+            series.setName(namelist.get(i));
+            series.setData(poolNameList);
+            series.getLabel().getNormal().setPosition("top");
+            series.getLabel().getNormal().setShow(true);
+            seriesList.add(series);
+        }
+        model.addAttribute("seriesList", JSON.toJSONString(seriesList));
+
         return "area-stack";
+    }
+
+
+    @RequestMapping("/changeSelect.action")
+    @ResponseBody
+    public String changeArea(HttpServletRequest request,Model model){
+        String areaId = request.getParameter("areaId");
+        /**
+         * 查询 巴拉巴拉
+         */
+        return "OK";
+
     }
 
 }
